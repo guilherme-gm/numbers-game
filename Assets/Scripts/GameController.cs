@@ -18,6 +18,14 @@ public class GameController : MonoBehaviour {
 
 		ProdList.Add (Products.Prod1, new Prod1(1));
 		ProdList.Add (Products.Prod2, new Prod2(0));
+		ProdList.Add (Products.Prod3, new Prod3(0));
+		ProdList.Add (Products.Prod4, new Prod4(0));
+		ProdList.Add (Products.Prod5, new Prod5(0));
+		ProdList.Add (Products.Prod6, new Prod6(0));
+		ProdList.Add (Products.Prod7, new Prod7(0));
+		ProdList.Add (Products.Prod8, new Prod8(0));
+		ProdList.Add (Products.Prod9, new Prod9(0));
+		ProdList.Add (Products.Prod10, new Prod10(0));
 
 		foreach (Products p in ProdList.Keys) {
 			UpdateButtonDisplay(p);
@@ -65,11 +73,11 @@ public class GameController : MonoBehaviour {
 
 	private void UpdateMoneyDisplay()
 	{
-		MoneyDisplay.text = this.Money.ToString ();
+		MoneyDisplay.text = "$ " + this.Money.ToString ();
 	}
 
 	private void UpdateButtonDisplay(Products type)
 	{
-		ProdButtons [(int)type].text = "Lv " + ProdList[type].Level + " - " + ProdList [type].NextLevelPrice;
+		ProdButtons [(int)type].text = "Lv " + ProdList[type].Level + " - $" + ProdList [type].NextLevelPrice;
 	}
 }
