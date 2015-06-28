@@ -78,6 +78,6 @@ public class GameController : MonoBehaviour {
 
 	private void UpdateButtonDisplay(Products type)
 	{
-		ProdButtons [(int)type].text = "Lv " + ProdList[type].Level + " - $" + ProdList [type].NextLevelPrice;
+		ProdButtons [(int)type].text = ProdList[type].Name + " (Lv " + ProdList[type].Level + ") - $" + ProdList [type].NextLevelPrice;
 	}
 }

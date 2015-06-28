@@ -2,7 +2,7 @@
 
 public enum Products {
 	Prod1 = 1,
-	Prod2 = 2,
+	Prod2,
 	Prod3,
 	Prod4,
 	Prod5,
@@ -16,12 +16,14 @@ public enum Products {
 public abstract class Product
 {
 	public int Level { get; private set; }
+	public string Name { get; private set; }
 
 	public BigInteger NextLevelPrice { get; private set; }
 	public BigInteger Income { get; private set; }
 
-	public Product(int level = 0)
+	public Product(int level = 0, string name = "Prod")
 	{
+		this.Name = name;
 		this.Level = level;
 		this.UpdateIncome ();
 		this.UpdateLevelPrice ();
@@ -48,7 +50,7 @@ public abstract class Product
 
 public class Prod1 : Product
 {
-	public Prod1 (int level) : base(level){}
+	public Prod1 (int level) : base(level, "Mel"){}
 
 	public override void UpdateIncome ()
 	{
@@ -64,7 +66,7 @@ public class Prod1 : Product
 
 public class Prod2 : Product
 {
-	public Prod2 (int level) : base(level){}
+	public Prod2 (int level) : base(level, "Larvas"){}
 	
 	public override void UpdateIncome ()
 	{
@@ -80,7 +82,7 @@ public class Prod2 : Product
 
 public class Prod3 : Product
 {
-	public Prod3 (int level) : base(level){}
+	public Prod3 (int level) : base(level, "Favos"){}
 	
 	public override void UpdateIncome ()
 	{
