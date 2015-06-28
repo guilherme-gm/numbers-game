@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour {
 	public BigInteger Money { get; private set; }
 	public Text[] ProdButtons;
 	public Text MoneyDisplay;
+	public GameObject UpgradesPanel;
 
 	private float NextUpdate = 0.0f;
 
@@ -35,29 +36,9 @@ public class GameController : MonoBehaviour {
 		NextUpdate = Time.time;
 	}
 
-	/// <summary>
-	/// Called whenever one of products buy button is clicked.
-	/// </summary>
-	/// <param name="buttonId">Button identifier.</param>
-	public void OnBuyClick(int buttonId)
-	{
-		// Converts buttonId to enum
-		Products p = (Products)buttonId;
-
-		// Ensures that this Id exists
-		if (!ProdList.ContainsKey (p)) {
-			// TODO : Error handling.
-			return;
-		}
-
-		if (this.Money >= ProdList [p].NextLevelPrice) {
-			Money -= ProdList[p].NextLevelPrice;
-			UpdateMoneyDisplay();
-			ProdList [p].Upgrade ();
-			UpdateButtonDisplay(p);
-		}
-	}
-
+	/* *******************
+	 *  Update Routines
+	 * *******************/
 	private void Update()
 	{
 		if (Time.time > this.NextUpdate) {
@@ -75,9 +56,66 @@ public class GameController : MonoBehaviour {
 	{
 		MoneyDisplay.text = "$ " + this.Money.ToString ();
 	}
-
+	
 	private void UpdateButtonDisplay(Products type)
 	{
 		ProdButtons [(int)type].text = "Lv " + ProdList[type].Level + " - $" + ProdList [type].NextLevelPrice;
+	}
+
+	/* *******************
+	 *  Click Routines
+	 * *******************/
+
+	/// <summary>
+	/// Called whenever one of products buy button is clicked.
+	/// </summary>
+	/// <param name="buttonId">Button identifier.</param>
+	public void OnBuyClick(int buttonId)
+	{
+		// Converts buttonId to enum
+		Products p = (Products)buttonId;
+		
+		// Ensures that this Id exists
+		if (!ProdList.ContainsKey (p)) {
+			// TODO : Error handling.
+			return;
+		}
+		
+		if (this.Money >= ProdList [p].NextLevelPrice) {
+			Money -= ProdList[p].NextLevelPrice;
+			UpdateMoneyDisplay();
+			ProdList [p].Upgrade ();
+			UpdateButtonDisplay(p);
+		}
+	}
+	
+	/// <summary>
+	/// Called whenever the upgrade button is clicked
+	/// Calls the upgrades screen
+	/// </summary>
+	public void OnUpgradeClick()
+	{
+		ShowUpgradeScreen ();
+	}
+
+	/// <summary>
+	/// Called whenever the close at upgrade screen is clicked
+	/// Closes the upgrades screen.
+	/// </summary>
+	public void OnUpgradeCloseClick()
+	{
+		HideUpgradeScreen ();
+	}
+	/* *******************
+	 *  Screen Callers
+	 * *******************/
+	private void ShowUpgradeScreen()
+	{
+		UpgradesPanel.SetActive (true);
+	}
+
+	private void HideUpgradeScreen()
+	{
+		UpgradesPanel.SetActive (false);
 	}
 }
