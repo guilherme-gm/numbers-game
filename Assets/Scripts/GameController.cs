@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
+	public static GameController Instance = null;
 
 	public Dictionary<Products, Product> ProdList { get; private set; }
-	public BigInteger Money { get; private set; }
+	public BigInteger Money; //{ get; private set; }
 	public Text[] ProdButtons;
 	public Text MoneyDisplay;
+	public GameObject UpgradesPanel;
 
 	// Use this for initialization
 	void Start () {
@@ -30,7 +33,38 @@ public class GameController : MonoBehaviour {
 		}
 
 		Money = 0;
+
+		Instance = this;
+		if (Instance == null)
+			Debug.LogError ("Failed to set Instance Of GameController");
 	}
+
+	/* *******************
+	 *  Update Routines
+	 * *******************/
+	private void Update()
+	{
+		foreach(Product prod in ProdList.Values)
+		{
+			this.Money += prod.TimedUpdate (Time.deltaTime);
+		}
+		
+		this.UpdateMoneyDisplay();
+	}
+
+	private void UpdateMoneyDisplay()
+	{
+		MoneyDisplay.text = "$ " + this.Money.ToString ();
+	}
+	
+	private void UpdateButtonDisplay(Products type)
+	{
+		ProdButtons [(int)type].text = ProdList[type].Name + " (Lv " + ProdList[type].Level + ") - $" + ProdList [type].NextLevelPrice;
+	}
+
+	/* *******************
+	 *  Click Routines
+	 * *******************/
 
 	/// <summary>
 	/// Called whenever one of products buy button is clicked.
@@ -40,13 +74,13 @@ public class GameController : MonoBehaviour {
 	{
 		// Converts buttonId to enum
 		Products p = (Products)buttonId;
-
+		
 		// Ensures that this Id exists
 		if (!ProdList.ContainsKey (p)) {
 			// TODO : Error handling.
 			return;
 		}
-
+		
 		if (this.Money >= ProdList [p].NextLevelPrice) {
 			Money -= ProdList[p].NextLevelPrice;
 			UpdateMoneyDisplay();
@@ -54,24 +88,35 @@ public class GameController : MonoBehaviour {
 			UpdateButtonDisplay(p);
 		}
 	}
-
-	private void Update()
+	
+	/// <summary>
+	/// Called whenever the upgrade button is clicked
+	/// Calls the upgrades screen
+	/// </summary>
+	public void OnUpgradeClick()
 	{
-		foreach(Product prod in ProdList.Values)
-		{
-			this.Money += prod.TimedUpdate (Time.deltaTime);
-		}
-
-		this.UpdateMoneyDisplay();
+		ShowUpgradeScreen ();
 	}
 
-	private void UpdateMoneyDisplay()
+	/// <summary>
+	/// Called whenever the close at upgrade screen is clicked
+	/// Closes the upgrades screen.
+	/// </summary>
+	public void OnUpgradeCloseClick()
 	{
-		MoneyDisplay.text = "$ " + this.Money.ToString ();
+		HideUpgradeScreen ();
 	}
 
-	private void UpdateButtonDisplay(Products type)
+	/* *******************
+	 *  Screen Callers
+	 * *******************/
+	private void ShowUpgradeScreen()
 	{
-		ProdButtons [(int)type].text = ProdList[type].Name + " (Lv " + ProdList[type].Level + ") - $" + ProdList [type].NextLevelPrice;
+		UpgradesPanel.SetActive (true);
+	}
+
+	private void HideUpgradeScreen()
+	{
+		UpgradesPanel.SetActive (false);
 	}
 }
