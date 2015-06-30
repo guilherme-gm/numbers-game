@@ -1,8 +1,9 @@
 ﻿using System.Collections;
+using UnityEngine;
 
 public enum Products {
 	Prod1 = 1,
-	Prod2 = 2,
+	Prod2,
 	Prod3,
 	Prod4,
 	Prod5,
@@ -18,25 +19,57 @@ public abstract class Product
 	public int Level { get; private set; }
 	public int Multiplier { get; private set; }
 
+	public string Name { get; private set; }
+
 	public BigInteger NextLevelPrice { get; private set; }
 	public BigInteger Income { get; private set; }
 
-	public Product(int level = 0)
+	public float CycleTime { get; private set; }
+	public float CurrentCycle { get; private set; }
+
+	public Product(int level = 0, string name = "Prod")
 	{
+		// Dummy Values (Avoids infinite loops)
+		this.CycleTime = 1f;
+		this.CurrentCycle = 1f;
+
+		// Initialize object data
+		this.Name = name;
 		this.Level = level;
-		this.UpdateIncome ();
-		this.UpdateLevelPrice ();
+		this.Update ();
 	}
 
 	public void Upgrade()
 	{
 		this.Level++;
+		this.Update ();
+	}
+
+	public void Update()
+	{
 		this.UpdateIncome ();
 		this.UpdateLevelPrice ();
+		this.UpdateCycleTime ();
+	}
+
+	public BigInteger TimedUpdate(float deltaTime)
+	{
+		BigInteger income = 0;
+
+		while ((this.CurrentCycle - deltaTime) <= 0) {
+			income += this.Income;
+			deltaTime -= this.CurrentCycle;
+			this.CurrentCycle = this.CycleTime;
+		}
+
+		this.CurrentCycle -= deltaTime;
+
+		return income;
 	}
 
 	public abstract void UpdateIncome ();
 	public abstract void UpdateLevelPrice ();
+	public abstract void UpdateCycleTime ();
 
 	public void UpdateIncome(BigInteger val) {
 		this.Income = val;
@@ -44,6 +77,10 @@ public abstract class Product
 
 	public void UpdateLevelPrice(BigInteger val) {
 		this.NextLevelPrice = val;
+	}
+
+	public void UpdateCycleTime(float newTime) {
+		this.CycleTime = newTime;
 	}
 
 	public void AddMultiplier(int val)
@@ -54,7 +91,7 @@ public abstract class Product
 
 public class Prod1 : Product
 {
-	public Prod1 (int level) : base(level){}
+	public Prod1 (int level) : base(level, "Mel"){}
 
 	public override void UpdateIncome ()
 	{
@@ -66,11 +103,16 @@ public class Prod1 : Product
 		base.UpdateLevelPrice (10 + 20 * base.Level);
 	}
 
+	public override void UpdateCycleTime ()
+	{
+		base.UpdateCycleTime (1f);
+	}
+
 }
 
 public class Prod2 : Product
 {
-	public Prod2 (int level) : base(level){}
+	public Prod2 (int level) : base(level, "Larvas"){}
 	
 	public override void UpdateIncome ()
 	{
@@ -81,12 +123,17 @@ public class Prod2 : Product
 	{
 		base.UpdateLevelPrice (50 + 100 * base.Level);
 	}
-	
+
+	public override void UpdateCycleTime ()
+	{
+		base.UpdateCycleTime (10f);
+	}
+
 }
 
 public class Prod3 : Product
 {
-	public Prod3 (int level) : base(level){}
+	public Prod3 (int level) : base(level, "Favos"){}
 	
 	public override void UpdateIncome ()
 	{
@@ -98,6 +145,10 @@ public class Prod3 : Product
 		base.UpdateLevelPrice (50 + 100 * base.Level);
 	}
 	
+	public override void UpdateCycleTime ()
+	{
+		base.UpdateCycleTime (10f);
+	}
 }
 
 public class Prod4 : Product
@@ -114,6 +165,10 @@ public class Prod4 : Product
 		base.UpdateLevelPrice (50 + 100 * base.Level);
 	}
 	
+	public override void UpdateCycleTime ()
+	{
+		base.UpdateCycleTime (10f);
+	}
 }
 
 public class Prod5 : Product
@@ -130,6 +185,10 @@ public class Prod5 : Product
 		base.UpdateLevelPrice (50 + 100 * base.Level);
 	}
 	
+	public override void UpdateCycleTime ()
+	{
+		base.UpdateCycleTime (10f);
+	}
 }
 
 public class Prod6 : Product
@@ -146,6 +205,10 @@ public class Prod6 : Product
 		base.UpdateLevelPrice (50 + 100 * base.Level);
 	}
 	
+	public override void UpdateCycleTime ()
+	{
+		base.UpdateCycleTime (10f);
+	}
 }
 
 public class Prod7 : Product
@@ -162,6 +225,10 @@ public class Prod7 : Product
 		base.UpdateLevelPrice (50 + 100 * base.Level);
 	}
 	
+	public override void UpdateCycleTime ()
+	{
+		base.UpdateCycleTime (10f);
+	}
 }
 
 public class Prod8 : Product
@@ -178,6 +245,10 @@ public class Prod8 : Product
 		base.UpdateLevelPrice (50 + 100 * base.Level);
 	}
 	
+	public override void UpdateCycleTime ()
+	{
+		base.UpdateCycleTime (10f);
+	}
 }
 
 public class Prod9 : Product
@@ -194,6 +265,10 @@ public class Prod9 : Product
 		base.UpdateLevelPrice (50 + 100 * base.Level);
 	}
 	
+	public override void UpdateCycleTime ()
+	{
+		base.UpdateCycleTime (10f);
+	}
 }
 
 public class Prod10 : Product
@@ -210,4 +285,8 @@ public class Prod10 : Product
 		base.UpdateLevelPrice (50 + 100 * base.Level);
 	}
 	
+	public override void UpdateCycleTime ()
+	{
+		base.UpdateCycleTime (10f);
+	}
 }

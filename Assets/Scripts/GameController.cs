@@ -13,8 +13,6 @@ public class GameController : MonoBehaviour
 	public Text MoneyDisplay;
 	public GameObject UpgradesPanel;
 
-	private float NextUpdate = 0.0f;
-
 	// Use this for initialization
 	void Start () {
 		this.ProdList = new Dictionary<Products, Product> ();
@@ -35,7 +33,6 @@ public class GameController : MonoBehaviour
 		}
 
 		Money = 0;
-		NextUpdate = Time.time;
 
 		Instance = this;
 		if (Instance = null)
@@ -47,15 +44,12 @@ public class GameController : MonoBehaviour
 	 * *******************/
 	private void Update()
 	{
-		if (Time.time > this.NextUpdate) {
-			foreach(Product prod in ProdList.Values)
-			{
-				Money +=  prod.Income;
-			}
-
-			this.UpdateMoneyDisplay();
-			this.NextUpdate += 1.0f;
+		foreach(Product prod in ProdList.Values)
+		{
+			this.Money += prod.TimedUpdate (Time.deltaTime);
 		}
+		
+		this.UpdateMoneyDisplay();
 	}
 
 	private void UpdateMoneyDisplay()
@@ -65,7 +59,7 @@ public class GameController : MonoBehaviour
 	
 	private void UpdateButtonDisplay(Products type)
 	{
-		ProdButtons [(int)type].text = "Lv " + ProdList[type].Level + " - $" + ProdList [type].NextLevelPrice;
+		ProdButtons [(int)type].text = ProdList[type].Name + " (Lv " + ProdList[type].Level + ") - $" + ProdList [type].NextLevelPrice;
 	}
 
 	/* *******************
