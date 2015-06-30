@@ -32,6 +32,7 @@ public abstract class Product
 		// Dummy Values (Avoids infinite loops)
 		this.CycleTime = 1f;
 		this.CurrentCycle = 1f;
+		this.Multiplier = 1;
 
 		// Initialize object data
 		this.Name = name;
@@ -57,7 +58,7 @@ public abstract class Product
 		BigInteger income = 0;
 
 		while ((this.CurrentCycle - deltaTime) <= 0) {
-			income += this.Income;
+			income += this.Income * this.Multiplier;
 			deltaTime -= this.CurrentCycle;
 			this.CurrentCycle = this.CycleTime;
 		}

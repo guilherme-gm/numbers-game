@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
 	public GameObject UpgradesPanel;
 
 	// Use this for initialization
-	void Awake () {
+	void Start () {
 		this.ProdList = new Dictionary<Products, Product> ();
 
 		ProdList.Add (Products.Prod1, new Prod1(1));
