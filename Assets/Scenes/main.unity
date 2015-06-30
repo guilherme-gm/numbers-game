@@ -1724,7 +1724,7 @@ GameObject:
   - 114: {fileID: 1471740372}
   - 114: {fileID: 1471740375}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: UpgrdPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1877,6 +1877,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9764c69c8945e8240b0bd2b5628dcbe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UpgradePanel: {fileID: 1471740370}
+  UpgradeBtn: {fileID: 149674, guid: a2fce8dfeb795c648b00a6c9bb0f45a7, type: 2}
 --- !u!1001 &1620531357
 Prefab:
   m_ObjectHideFlags: 0

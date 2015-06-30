@@ -19,13 +19,18 @@ public class UpgradeButton : MonoBehaviour {
 	
 	void Start()
 	{
-		this.TitleText.text = Data.Title;
-		this.DescText.text = Data.Description;
-		this.PriceText.text = "" + Data.Price;
+		this.UpdateDisplay ();
 	}
 
 	public void OnClickEvent()
 	{
-		UpgradeController.Instance.OnBuyUpgrade (this.Data.UpgradeId);
+		UpgradeController.Instance.OnBuyUpgrade (this.Data.UpgradeId, this.gameObject);
+	}
+
+	public void UpdateDisplay()
+	{
+		this.TitleText.text = Data.Title;
+		this.DescText.text = Data.Description;
+		this.PriceText.text = "" + Data.Price;
 	}
 }

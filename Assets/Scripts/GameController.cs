@@ -5,16 +5,16 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-	public static GameController Instance;
+	public static GameController Instance = null;
 
 	public Dictionary<Products, Product> ProdList { get; private set; }
-	public BigInteger Money { get; private set; }
+	public BigInteger Money; //{ get; private set; }
 	public Text[] ProdButtons;
 	public Text MoneyDisplay;
 	public GameObject UpgradesPanel;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		this.ProdList = new Dictionary<Products, Product> ();
 
 		ProdList.Add (Products.Prod1, new Prod1(1));
@@ -35,7 +35,7 @@ public class GameController : MonoBehaviour
 		Money = 0;
 
 		Instance = this;
-		if (Instance = null)
+		if (Instance == null)
 			Debug.LogError ("Failed to set Instance Of GameController");
 	}
 
