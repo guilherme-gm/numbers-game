@@ -32,7 +32,7 @@ public class MultiplierUpgrade : Upgrade
 
 	public override void ApplyUpgrade ()
 	{
-		Product prod = GameController.Instance.ProdList [this.Target].AddMultiplier(Multiplier);
+		GameController.Instance.ProdList [this.Target].AddMultiplier(Multiplier);
 	}
 }
 
@@ -47,6 +47,6 @@ public class CycleReduceUpgrade : Upgrade
 
 	public override void ApplyUpgrade ()
 	{
-		Product prod = GameController.Instance.ProdList [this.Target].AddCycleReduceFactor(this.Factor);
+		GameController.Instance.ProdList [this.Target].AddCycleReduceFactor(this.Factor);
 	}
 }

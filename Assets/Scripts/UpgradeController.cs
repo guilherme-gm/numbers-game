@@ -19,6 +19,7 @@ public class UpgradeController : MonoBehaviour {
 		UpgradeList.Add (2, new MultiplierUpgrade (Products.Prod1, 10));
 		UpgradeList.Add (3, new MultiplierUpgrade (Products.Prod1, 15));
 		UpgradeList.Add (4, new MultiplierUpgrade (Products.Prod1, 20));
+		UpgradeList.Add (5, new CycleReduceUpgrade (Products.Prod1, 0.5f));
 
 		UpdateUpgrdList ();
 

@@ -62,7 +62,7 @@ public abstract class Product
 		while ((this.CurrentCycle - deltaTime) <= 0) {
 			income += this.Income * this.Multiplier;
 			deltaTime -= this.CurrentCycle;
-			this.CurrentCycle = this.CycleTime;
+			this.CurrentCycle = this.CycleTime * this.CycleReduceFactor;
 		}
 
 		this.CurrentCycle -= deltaTime;
