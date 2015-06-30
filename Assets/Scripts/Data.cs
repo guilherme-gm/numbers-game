@@ -16,6 +16,7 @@ public enum Products {
 public abstract class Product
 {
 	public int Level { get; private set; }
+	public int Multiplier { get; private set; }
 
 	public BigInteger NextLevelPrice { get; private set; }
 	public BigInteger Income { get; private set; }
@@ -43,6 +44,11 @@ public abstract class Product
 
 	public void UpdateLevelPrice(BigInteger val) {
 		this.NextLevelPrice = val;
+	}
+
+	public void AddMultiplier(int val)
+	{
+		this.Multiplier += val;
 	}
 }
 

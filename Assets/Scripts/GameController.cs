@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
+	public static GameController Instance;
 
 	public Dictionary<Products, Product> ProdList { get; private set; }
 	public BigInteger Money { get; private set; }
@@ -34,6 +36,10 @@ public class GameController : MonoBehaviour {
 
 		Money = 0;
 		NextUpdate = Time.time;
+
+		Instance = this;
+		if (Instance = null)
+			Debug.LogError ("Failed to set Instance Of GameController");
 	}
 
 	/* *******************
@@ -106,6 +112,7 @@ public class GameController : MonoBehaviour {
 	{
 		HideUpgradeScreen ();
 	}
+
 	/* *******************
 	 *  Screen Callers
 	 * *******************/

@@ -26,6 +26,6 @@ public class UpgradeButton : MonoBehaviour {
 
 	public void OnClickEvent()
 	{
-
+		UpgradeController.Instance.OnBuyUpgrade (this.Data.UpgradeId);
 	}
 }
