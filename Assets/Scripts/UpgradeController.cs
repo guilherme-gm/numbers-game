@@ -29,16 +29,12 @@ public class UpgradeController : MonoBehaviour {
 
 	public void OnBuyUpgrade(int upgradeId, GameObject button)
 	{
-		Product prod = GameController.Instance.ProdList [UpgradeList[upgradeId].Target];
-
-		if (UpgradeList[upgradeId].Type == UpgradeType.Multiplier) {
-			prod.AddMultiplier(((MultiplierUpgrade)UpgradeList[upgradeId]).Multiplier);
-		}
+		UpgradeList [upgradeId].ApplyUpgrade ();
 		GameObject.Destroy (button);
 	}
 
 	//
-	public void UpdateUpgrdList()
+	private void UpdateUpgrdList()
 	{
 		// TODO : Maybe this can be improved
 		//		 to not require a list clean-up

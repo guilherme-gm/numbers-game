@@ -26,13 +26,15 @@ public abstract class Product
 
 	public float CycleTime { get; private set; }
 	public float CurrentCycle { get; private set; }
+	public float CycleReduceFactor { get; private set; }
 
 	public Product(int level = 0, string name = "Prod")
 	{
-		// Dummy Values (Avoids infinite loops)
+		// Dummy Values
 		this.CycleTime = 1f;
 		this.CurrentCycle = 1f;
 		this.Multiplier = 1;
+		this.CycleReduceFactor = 1f;
 
 		// Initialize object data
 		this.Name = name;
@@ -87,6 +89,11 @@ public abstract class Product
 	public void AddMultiplier(int val)
 	{
 		this.Multiplier += val;
+	}
+
+	public void AddCycleReduceFactor(float val)
+	{
+		this.CycleReduceFactor *= (1f - val);
 	}
 }
 
