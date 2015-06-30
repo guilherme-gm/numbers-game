@@ -13,13 +13,13 @@ public class UpgradeController : MonoBehaviour {
 
 	void Start()
 	{
-		UpgradeList = new Dictionary<int, Upgrade>();
+		UpgradeList = GameLoader.LoadUpgrades ();
 
-		UpgradeList.Add (1, new MultiplierUpgrade (Products.Prod1, 5));
-		UpgradeList.Add (2, new MultiplierUpgrade (Products.Prod1, 10));
-		UpgradeList.Add (3, new MultiplierUpgrade (Products.Prod1, 15));
-		UpgradeList.Add (4, new MultiplierUpgrade (Products.Prod1, 20));
-		UpgradeList.Add (5, new CycleReduceUpgrade (Products.Prod1, 0.5f));
+		//UpgradeList.Add (1, new MultiplierUpgrade (Products.Prod1, 5));
+		//UpgradeList.Add (2, new MultiplierUpgrade (Products.Prod1, 10));
+		//UpgradeList.Add (3, new MultiplierUpgrade (Products.Prod1, 15));
+		//UpgradeList.Add (4, new MultiplierUpgrade (Products.Prod1, 20));
+		//UpgradeList.Add (5, new CycleReduceUpgrade (Products.Prod1, 0.5f));
 
 		UpdateUpgrdList ();
 
@@ -49,13 +49,16 @@ public class UpgradeController : MonoBehaviour {
 		foreach (int id in this.UpgradeList.Keys) {
 			GameObject upgrdBtn = Instantiate(this.UpgradeBtn) as GameObject;
 			UpgradeButton btnData = upgrdBtn.GetComponent<UpgradeButton>();
-			btnData.Data = new UpgradeBtnData()
+			if (this.UpgradeList[id].Type == UpgradeType.Multiplier)
 			{
-				Title = "Bla"+id,
-				Description = "Ha"+id,
-				UpgradeId = id,
-				Price = 100
-			};
+				btnData.Data = new UpgradeBtnData()
+				{
+					Title = UpgradeList[id].Name,
+					Description = "Multiplies the income of " + GameController.Instance.ProdList[UpgradeList[id].Target].Name,
+					UpgradeId = id,
+					Price = UpgradeList[id].Price
+				};
+			}
 			btnData.UpdateDisplay();
 			upgrdBtn.transform.SetParent(UpgradePanel.transform);
 		}

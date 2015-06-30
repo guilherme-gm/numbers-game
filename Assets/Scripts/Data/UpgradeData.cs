@@ -12,10 +12,16 @@ public abstract class Upgrade
 	public UpgradeType Type { get; private set; }
 	public Products Target { get; private set; }
 
-	public Upgrade(UpgradeType type, Products target)
+	public string Name { get; private set; }
+
+	public BigInteger Price { get; private set; }
+
+	public Upgrade(UpgradeType type, Products target, string name, BigInteger price)
 	{
 		this.Type = type;
 		this.Target = target;
+		this.Name = name;
+		this.Price = price;
 	}
 
 	public abstract void ApplyUpgrade ();
@@ -25,7 +31,7 @@ public class MultiplierUpgrade : Upgrade
 {
 	public int Multiplier { get; private set; }
 
-	public MultiplierUpgrade(Products prod, int multiplier) : base(UpgradeType.Multiplier, prod)
+	public MultiplierUpgrade(Products prod, int multiplier, string name, BigInteger price) : base(UpgradeType.Multiplier, prod, name, price)
 	{
 		this.Multiplier = multiplier;
 	}
@@ -40,7 +46,7 @@ public class CycleReduceUpgrade : Upgrade
 {
 	public float Factor { get; private set; }
 	
-	public CycleReduceUpgrade(Products prod, float factor) : base(UpgradeType.CycleReducer, prod)
+	public CycleReduceUpgrade(Products prod, float factor, string name, BigInteger price) : base(UpgradeType.CycleReducer, prod, name, price)
 	{
 		this.Factor = factor;
 	}
