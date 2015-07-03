@@ -11,9 +11,13 @@ public static class GameLoader
 		public int[] ProdList { get; set; }
 		//public Dictionary<int, Upgrade> UpgradeList = new Dictionary<int, Upgrade>();
 
+		// Initializes with new game data
 		public GameDataContainer()
 		{
 			ProdList = new int[(int)Products.Max];
+			ProdList[(int)Products.Prod1] = 1;
+
+			Money = 0;
 		}
 	}
 
@@ -48,6 +52,10 @@ public static class GameLoader
 	{
 		GameDataContainer data = new GameDataContainer ();
 
+		// Ensure that the file exists, else returns 
+		if (!File.Exists ("Data/SaveGame.dat"))
+			return data;
+
 		using (BinaryReader br = new BinaryReader(File.OpenRead("Data/SaveGame.dat")))
 		{
 			br.ReadBytes(10); // Header
@@ -55,7 +63,6 @@ public static class GameLoader
 			int moneyBytes = br.ReadInt32(); // sizeof (money)
 			data.Money = new BigInteger(br.ReadBytes(moneyBytes)); // money
 
-			Debug.Log(data.Money);
 			// Loop for product data
 			for (int i = 0; i < 2; i++)//(int)Products.Max; i++)
 			{
