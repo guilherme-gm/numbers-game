@@ -180,6 +180,10 @@ Prefab:
       propertyPath: m_Name
       value: Product1
       objectReference: {fileID: 0}
+    - target: {fileID: 11485520, guid: ee36cee117cd02040b92e0f6cdde6e1e, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ee36cee117cd02040b92e0f6cdde6e1e, type: 2}
   m_IsPrefabParent: 0
@@ -280,7 +284,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11485520, guid: ee36cee117cd02040b92e0f6cdde6e1e, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 11485520, guid: ee36cee117cd02040b92e0f6cdde6e1e, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -593,7 +597,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11485520, guid: ee36cee117cd02040b92e0f6cdde6e1e, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11485520, guid: ee36cee117cd02040b92e0f6cdde6e1e, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -808,13 +812,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11485520, guid: ee36cee117cd02040b92e0f6cdde6e1e, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 11470694, guid: ee36cee117cd02040b92e0f6cdde6e1e, type: 2}
       propertyPath: m_Text
       value: 'Prod6
 
 '
+      objectReference: {fileID: 0}
+    - target: {fileID: 187010, guid: ee36cee117cd02040b92e0f6cdde6e1e, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ee36cee117cd02040b92e0f6cdde6e1e, type: 2}
@@ -921,7 +929,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11485520, guid: ee36cee117cd02040b92e0f6cdde6e1e, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 9
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 11485520, guid: ee36cee117cd02040b92e0f6cdde6e1e, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1201,7 +1209,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11485520, guid: ee36cee117cd02040b92e0f6cdde6e1e, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11485520, guid: ee36cee117cd02040b92e0f6cdde6e1e, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1608,7 +1616,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11485520, guid: ee36cee117cd02040b92e0f6cdde6e1e, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 11485520, guid: ee36cee117cd02040b92e0f6cdde6e1e, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1841,17 +1849,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProdButtons:
-  - {fileID: 0}
   - {fileID: 1142587827}
   - {fileID: 1829423257}
   - {fileID: 358549215}
   - {fileID: 11128964}
   - {fileID: 406893788}
-  - {fileID: 836259906}
-  - {fileID: 748930247}
-  - {fileID: 1225593382}
-  - {fileID: 334728351}
   - {fileID: 2002973943}
+  - {fileID: 334728351}
+  - {fileID: 1225593382}
+  - {fileID: 748930247}
+  - {fileID: 836259906}
   MoneyDisplay: {fileID: 1941158975}
   UpgradesPanel: {fileID: 1314259824}
 --- !u!4 &1561812816
@@ -1970,7 +1977,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11485520, guid: ee36cee117cd02040b92e0f6cdde6e1e, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11485520, guid: ee36cee117cd02040b92e0f6cdde6e1e, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2090,7 +2097,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11485520, guid: ee36cee117cd02040b92e0f6cdde6e1e, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 11485520, guid: ee36cee117cd02040b92e0f6cdde6e1e, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2318,7 +2325,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11485520, guid: ee36cee117cd02040b92e0f6cdde6e1e, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11485520, guid: ee36cee117cd02040b92e0f6cdde6e1e, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

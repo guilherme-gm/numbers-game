@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public enum Products {
-	Prod1 = 1,
+public enum Products : int {
+	Prod1 = 0,
 	Prod2,
 	Prod3,
 	Prod4,
@@ -11,7 +11,9 @@ public enum Products {
 	Prod7,
 	Prod8,
 	Prod9,
-	Prod10 = 10
+	Prod10 = 9,
+
+	Max = 10, // Must always be the last
 }
 
 public abstract class Product
@@ -53,6 +55,11 @@ public abstract class Product
 		this.UpdateIncome ();
 		this.UpdateLevelPrice ();
 		this.UpdateCycleTime ();
+	}
+
+	public void Load(int level)
+	{
+		this.Level = level;
 	}
 
 	public BigInteger TimedUpdate(float deltaTime)

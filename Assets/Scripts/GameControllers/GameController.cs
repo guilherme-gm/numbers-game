@@ -17,8 +17,21 @@ public class GameController : MonoBehaviour
 	void Start () {
 		this.ProdList = new Dictionary<Products, Product> ();
 
-		ProdList.Add (Products.Prod1, new Prod1(1));
-		ProdList.Add (Products.Prod2, new Prod2(0));
+		GameLoader.GameDataContainer cont = GameLoader.LoadGameSave ();
+
+		this.Money = cont.Money;
+		UpdateMoneyDisplay ();
+
+		ProdList.Add (Products.Prod1, new Prod1(cont.ProdList[(int)Products.Prod1]));
+		ProdList.Add (Products.Prod2, new Prod2(cont.ProdList[(int)Products.Prod2]));
+		/*ProdList.Add (Products.Prod3, new Prod3(cont.ProdList[(int)Products.Prod3]));
+		ProdList.Add (Products.Prod4, new Prod4(cont.ProdList[(int)Products.Prod4]));
+		ProdList.Add (Products.Prod5, new Prod5(cont.ProdList[(int)Products.Prod5]));
+		ProdList.Add (Products.Prod6, new Prod6(cont.ProdList[(int)Products.Prod6]));
+		ProdList.Add (Products.Prod7, new Prod7(cont.ProdList[(int)Products.Prod7]));
+		ProdList.Add (Products.Prod8, new Prod8(cont.ProdList[(int)Products.Prod8]));
+		ProdList.Add (Products.Prod9, new Prod9(cont.ProdList[(int)Products.Prod9]));
+		ProdList.Add (Products.Prod10, new Prod10(cont.ProdList[(int)Products.Prod10]));*/
 		ProdList.Add (Products.Prod3, new Prod3(0));
 		ProdList.Add (Products.Prod4, new Prod4(0));
 		ProdList.Add (Products.Prod5, new Prod5(0));
@@ -32,11 +45,12 @@ public class GameController : MonoBehaviour
 			UpdateButtonDisplay(p);
 		}
 
-		Money = 0;
+		//Money = 0;
 
 		Instance = this;
 		if (Instance == null)
 			Debug.LogError ("Failed to set Instance Of GameController");
+
 	}
 
 	/* *******************
