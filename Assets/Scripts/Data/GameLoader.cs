@@ -1,4 +1,6 @@
 using UnityEngine;
+using System;
+using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -61,10 +63,10 @@ public static class GameLoader
 			br.ReadBytes(10); // Header
 
 			int moneyBytes = br.ReadInt32(); // sizeof (money)
-			data.Money = new BigInteger(br.ReadBytes(moneyBytes)); // money
+			data.Money = new BigInteger(Encoding.ASCII.GetString(br.ReadBytes(moneyBytes))); // money
 
 			// Loop for product data
-			for (int i = 0; i < 2; i++)//(int)Products.Max; i++)
+			for (int i = 0; i < (int)Products.Max; i++)
 			{
 				int level;
 				level = br.ReadInt32();
@@ -74,5 +76,29 @@ public static class GameLoader
 		}
 
 		return data;
+	}
+
+	public static bool SaveGame()
+	{
+		GameDataContainer data = new GameDataContainer ();
+
+		data.Money = GameController.Instance.Money;
+		for(int i = 0; i < (int)Products.Max; i++) {
+			data.ProdList[i] = GameController.Instance.ProdList[(Products)i].Level;
+		}
+
+
+		using (BinaryWriter bw = new BinaryWriter(File.OpenWrite("Data/SaveGame.dat")))
+		{
+			bw.Write(new char[10]);
+			byte[] money = Encoding.ASCII.GetBytes(data.Money.ToString());
+			bw.Write(money.Length);
+			bw.Write(money);
+			for (int i = 0; i < (int)Products.Max; i++) {
+				bw.Write(data.ProdList[i]);
+			}
+		}
+
+		return true;
 	}
 }

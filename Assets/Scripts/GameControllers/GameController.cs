@@ -34,6 +34,11 @@ public class GameController : MonoBehaviour
 
 	}
 
+	private void OnApplicationQuit()
+	{
+		GameLoader.SaveGame ();
+	}
+
 	/* *******************
 	 *  Update Routines
 	 * *******************/
