@@ -6,6 +6,7 @@ public class UpgradeController : MonoBehaviour {
 	public static UpgradeController Instance;
 
 	public Dictionary<int, Upgrade> UpgradeList;
+	public List<int> AcquiredUps;
 
 	public GameObject UpgradePanel;
 	public GameObject UpgradeBtn;
@@ -14,6 +15,7 @@ public class UpgradeController : MonoBehaviour {
 	void Start()
 	{
 		UpgradeList = GameLoader.LoadUpgrades ();
+		AcquiredUps = new List<int> ();
 
 		//UpgradeList.Add (1, new MultiplierUpgrade (Products.Prod1, 5));
 		//UpgradeList.Add (2, new MultiplierUpgrade (Products.Prod1, 10));
@@ -21,16 +23,28 @@ public class UpgradeController : MonoBehaviour {
 		//UpgradeList.Add (4, new MultiplierUpgrade (Products.Prod1, 20));
 		//UpgradeList.Add (5, new CycleReduceUpgrade (Products.Prod1, 0.5f));
 
-		UpdateUpgrdList ();
+		//UpdateUpgrdList ();
 
 		Instance = this;
 		if (Instance == null)
 			Debug.LogError ("Failed to set Instance Of UpgradeController");
 	}
 
+	public void OnLoadGame(ref GameLoader.GameDataContainer data)
+	{
+		for (int i = 0; i < data.AcquiredUpgrades.Count; i++)
+		{
+			this.UpgradeList[data.AcquiredUpgrades[i]].ApplyUpgrade();
+			this.UpgradeList.Remove(data.AcquiredUpgrades[i]);
+			this.AcquiredUps.Add(data.AcquiredUpgrades[i]);
+		}
+		UpdateUpgrdList ();
+	}
+
 	public void OnBuyUpgrade(int upgradeId, GameObject button)
 	{
-		UpgradeList [upgradeId].ApplyUpgrade ();
+		this.UpgradeList [upgradeId].ApplyUpgrade ();
+		this.AcquiredUps.Add (upgradeId);
 		GameObject.Destroy (button);
 	}
 

@@ -1830,6 +1830,7 @@ GameObject:
   - 4: {fileID: 1561812816}
   - 114: {fileID: 1561812815}
   - 114: {fileID: 1561812817}
+  - 114: {fileID: 1561812818}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -1884,8 +1885,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9764c69c8945e8240b0bd2b5628dcbe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AcquiredUps: 
   UpgradePanel: {fileID: 1471740370}
   UpgradeBtn: {fileID: 149674, guid: a2fce8dfeb795c648b00a6c9bb0f45a7, type: 2}
+--- !u!114 &1561812818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1561812814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7acb9240b11a354dbb919039163a455, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1620531357
 Prefab:
   m_ObjectHideFlags: 0

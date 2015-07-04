@@ -11,13 +11,15 @@ public static class GameLoader
 	{
 		public BigInteger Money { get; set; }
 		public int[] ProdList { get; set; }
-		//public Dictionary<int, Upgrade> UpgradeList = new Dictionary<int, Upgrade>();
+		public List<int> AcquiredUpgrades { get; set; }
 
 		// Initializes with new game data
 		public GameDataContainer()
 		{
 			ProdList = new int[(int)Products.Max];
 			ProdList[(int)Products.Prod1] = 1;
+
+			AcquiredUpgrades = new List<int>();
 
 			Money = 0;
 		}
@@ -73,6 +75,12 @@ public static class GameLoader
 
 				data.ProdList[i] = level;
 			}
+
+			int upgradeCount = br.ReadInt32();
+			for (int i = 0; i < upgradeCount; i++) {
+				int upId = br.ReadInt32();
+				data.AcquiredUpgrades.Add(upId);
+			}
 		}
 
 		return data;
@@ -87,7 +95,6 @@ public static class GameLoader
 			data.ProdList[i] = GameController.Instance.ProdList[(Products)i].Level;
 		}
 
-
 		using (BinaryWriter bw = new BinaryWriter(File.OpenWrite("Data/SaveGame.dat")))
 		{
 			bw.Write(new char[10]);
@@ -97,6 +104,13 @@ public static class GameLoader
 			for (int i = 0; i < (int)Products.Max; i++) {
 				bw.Write(data.ProdList[i]);
 			}
+
+			int upCount = UpgradeController.Instance.AcquiredUps.Count;
+			bw.Write(upCount);
+			for(int i = 0; i < upCount; i++) {
+				bw.Write(UpgradeController.Instance.AcquiredUps[i]);
+			}
+
 		}
 
 		return true;

@@ -15,10 +15,15 @@ public class GameController : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
+		Instance = this;
+		if (Instance == null)
+			Debug.LogError ("Failed to set Instance Of GameController");
+
 		this.ProdList = new Dictionary<Products, Product> ();
+	}
 
-		GameLoader.GameDataContainer cont = GameLoader.LoadGameSave ();
-
+	public void OnLoadGame(ref GameLoader.GameDataContainer cont)
+	{
 		this.Money = cont.Money;
 		UpdateMoneyDisplay ();
 
@@ -27,11 +32,6 @@ public class GameController : MonoBehaviour
 		foreach (Products p in ProdList.Keys) {
 			UpdateButtonDisplay(p);
 		}
-
-		Instance = this;
-		if (Instance == null)
-			Debug.LogError ("Failed to set Instance Of GameController");
-
 	}
 
 	private void OnApplicationQuit()
